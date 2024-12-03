@@ -39,6 +39,7 @@ def create_grid(sub_grid: int) -> list[list]:
 def remove_numbers(grid: list[list]) -> None:
     #randomly sets numbers to zero on the grid
     num_of_cells = GRID_SIZE * GRID_SIZE
+    
     empties = num_of_cells * 3 // 7  #if you want to make the game harder lower this number to 4
     for i in sample(range(num_of_cells), empties):
         grid[i//GRID_SIZE][i%GRID_SIZE]=0
@@ -49,22 +50,28 @@ class Grid:
         self.num_x_offset=15
         self.num_y_offset=8
         self.line_coordinates=create_line_coordinates(self.cellSize)
-        self.grid = create_grid(SUB_GRID_SIZE)
-        self.__test_grid=deepcopy(self.grid)
         self.win=False
-        
-        remove_numbers(self.grid)
-        self.occupied_cell_coordinates=self.pre_occupied_cells()
-        print(self.occupied_cell_coordinates)
-
         self.game_font = font
 
+        self.grid = create_grid(SUB_GRID_SIZE)
+        self.__test_grid=deepcopy(self.grid)       
+        remove_numbers(self.grid)
+        self.occupied_cell_coordinates=self.pre_occupied_cells()
+        #print(self.occupied_cell_coordinates)
+
         self.selection = SelectNumber(pygame, self.game_font)
+
+    def restart(self) -> None:
+        self.grid = create_grid(SUB_GRID_SIZE)
+        self.__test_grid=deepcopy(self.grid)
+        remove_numbers(self.grid)
+        self.occupied_cell_coordinates=self.pre_occupied_cells()
+        self.win=False
 
     def check_grids(self):
         for y in range(len(self.grid)):
             for x in range(len(self.grid[y])):
-                if self.grid[y][x] != se;f.__test_grid{y][x]:
+                if self.grid[y][x] != self.__test_grid[y][x]:
                     return False
         return True
                 
