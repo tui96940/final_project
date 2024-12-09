@@ -1,3 +1,5 @@
+#youtube link: https://www.youtube.com/watch?v=RMy66ja0cXA
+
 #sudoku.py file#
 import pygame
 import os
@@ -10,10 +12,11 @@ pygame.display.set_caption("sudoku")
 
 pygame.font.init()
 game_font = pygame.font.SysFont('Comic Sans MS', 25)
-game_font2=pygame.font.SysFont('Comic Sans MS', 12)
+game_font2=pygame.font.SysFont('Arial', 12)
 
 grid = Grid(pygame, game_font)
 running = True
+
 
 while running:
     for event in pygame.event.get():
@@ -24,18 +27,21 @@ while running:
                 pos=pygame.mouse.get_pos()
                 grid.get_mouse_click(pos[0], pos[1])
         if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_SPACE and grid.win:
-                grid.restart()
+            if event.key==pygame.K_RETURN and grid.win:
+                    grid.restart()
                 
     surface.fill((0,0,0)) #makes window surface black
 
     grid.draw_all(pygame, surface)
 
     if grid.win:
-        won_surface=game_font.render("Yon Won!",False,(0,255,0))
+        won_surface=game_font.render("Yon Won!",False,(191, 64, 191))
         surface.blit(won_surface, (475,300))
-        press_space_surf=game_font2.render("Press space to restart!", False, (0,255,200))
-        surface.blit(press_space_surf, (460, 350))
+        #press_space_surf1=game_font2.render("Press space for Easy!", False, (0,255,200))
+        #surface.blit(press_space_surf1, (457, 350))
+        press_space_surf2=game_font2.render("Press enter to restart!", False, (255,255,0))
+        surface.blit(press_space_surf2, (475, 345))
 
     pygame.display.flip()
+
     
