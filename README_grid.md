@@ -39,7 +39,6 @@ def create_grid(sub_grid: int) -> list[list]:
 def remove_numbers(grid: list[list]) -> None:
     #randomly sets numbers to zero on the grid
     num_of_cells = GRID_SIZE * GRID_SIZE
-    
     empties = num_of_cells * 3 // 7  #if you want to make the game harder lower this number to 4
     for i in sample(range(num_of_cells), empties):
         grid[i//GRID_SIZE][i%GRID_SIZE]=0
